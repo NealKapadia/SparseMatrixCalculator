@@ -365,27 +365,16 @@ public:
     }
 };
 
-int main(int argc, char *argv[])
+//Main function to read the input file, process the matricies, and write the output file
+int main()
 {
-    // Ensure the program is passed exactly one argument (the input file name)
-    if (argc != 2)
-    {
-        std::cerr << "Usage: " << argv[0] << " <inputfile.csv>" << std::endl;
-        return 1;
-    }
-    std::string inputfile = argv[1];
     MatrixCSVReader reader;
-    // Parse the csv file
-    reader.readCSV(inputfile);
-    // Follow the matrix operations
-    reader.processMatrices();
-    size_t pos = inputfile.find(".csv");
-    std::string outputfile = (pos != std::string::npos)
-                                 ? inputfile.substr(0, pos) + "_output.csv"
-                                 : inputfile + "_output.csv";
-
-    // Write the output to the CSV file
-    reader.writeToCSV(outputfile);
+    std::string inputfile;
+    std::cout << "What is the name of the input file?" << std::endl;
+    std::cin >> inputfile;
+    reader.readCSV(inputfile); //reads the input file
+    reader.processMatrices(); //processes matricies into linkedlist
+    reader.writeToCSV(inputfile.substr(0,inputfile.length()-4) + "_output.csv"); //writes output file
 
     return 0;
 }
